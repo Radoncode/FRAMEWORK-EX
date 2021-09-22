@@ -3,6 +3,8 @@
 namespace Framework;
 
 use Framework\Router\Route;
+use Zend\Expressive\Router\Route as ZendRoute;
+use Zend\Expressive\Router\FastRouteRouter;
 use Psr\Http\Message\ServerRequestInterface;
 
 /**
@@ -11,15 +13,23 @@ use Psr\Http\Message\ServerRequestInterface;
 class Router {
     
     /**
-     * get
-     *
+     * @var FastRouteRouter 
+     */
+    private $router;
+
+    public function __construct()
+    {
+        $this->router = new FastRouteRouter();
+    }
+    
+    /**
      * @param  string $path
      * @param  callable $callable
      * @param  string $name
      */
     public function get(string $path, callable $callable, string $name)
     {
-        
+        $this->router->addRoute(new ZendRoute($path, $callable, ['GET'], $name));
     }
     
     /**
@@ -28,6 +38,6 @@ class Router {
      */
     public function match(ServerRequestInterface $request): ?Route
     {
-        
+        $this->router->match()
     }
 }

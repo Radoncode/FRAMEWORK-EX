@@ -7,7 +7,34 @@ namespace Framework\Router;
  * Represent a matched route
  */
 class Route {
-    
+        
+    /**
+     * name
+     *
+     * @var mixed
+     */
+    private $name;    
+    /**
+     * callback
+     *
+     * @var mixed
+     */
+    private $callback;    
+    /**
+     * parameters
+     *
+     * @var mixed
+     */
+    private $parameters;
+
+    public function __construct(string $name, callable $callback, array $parameters)
+    {
+        
+        $this->name = $name;
+        $this->callback = $callback;
+        $this->paramters = $parameters;
+    }
+
         
     /**
      * @return string
