@@ -38,6 +38,18 @@ class Router {
      */
     public function match(ServerRequestInterface $request): ?Route
     {
-        $this->router->match()
+        $result = $this->router->match($request);
+        if ($result->isSuccess()) {
+            return new Route($result->getMatchedRouteName(),
+                $result->getMatchedMiddleware(),
+                $result->getMatchedParams()
+            );
+        }
+        return null;
     }
+
+    public function generateUri(string $name, array $params): ?string
+    {
+        return $this->router->generateUri($name, $params);
+    }   
 }
