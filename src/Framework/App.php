@@ -15,9 +15,10 @@ class App
      * @param  string[] $modules List of the loading modules
      */
     public function __construct(array $modules = [])
-    {
+    {   
+        $router = new Router();
         foreach($modules as $module){
-            $this->modules[] = new $module();
+            $this->modules[] = new $module($router);
         }
     }
 
