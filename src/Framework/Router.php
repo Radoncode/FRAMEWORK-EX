@@ -10,10 +10,11 @@ use Psr\Http\Message\ServerRequestInterface;
 /**
  * Register and match routes
  */
-class Router {
+class Router
+{
     
     /**
-     * @var FastRouteRouter 
+     * @var FastRouteRouter
      */
     private $router;
 
@@ -40,7 +41,8 @@ class Router {
     {
         $result = $this->router->match($request);
         if ($result->isSuccess()) {
-            return new Route($result->getMatchedRouteName(),
+            return new Route(
+                $result->getMatchedRouteName(),
                 $result->getMatchedMiddleware(),
                 $result->getMatchedParams()
             );
@@ -51,5 +53,5 @@ class Router {
     public function generateUri(string $name, array $params): ?string
     {
         return $this->router->generateUri($name, $params);
-    }   
+    }
 }

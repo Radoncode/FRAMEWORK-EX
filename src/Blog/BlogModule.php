@@ -5,7 +5,8 @@ namespace App\Blog;
 use Framework\Router;
 use Psr\Http\Message\ServerRequestInterface as Request;
 
-class BlogModule {
+class BlogModule
+{
 
     public function __construct(Router $router)
     {
@@ -16,10 +17,10 @@ class BlogModule {
     public function index(Request $request): string
     {
         return '<h1>Welcome to my blog</h1>';
-    }   
+    }
 
     public function show(Request $request): string
-    {   
-        return '<h1>Welcome to my post'.$request->getAttribute('slug').'</h1>';
-    } 
+    {
+        return '<h1>Welcome to my post '.$request->getAttribute('slug').'</h1>';
+    }
 }

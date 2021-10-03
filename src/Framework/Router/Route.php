@@ -6,20 +6,21 @@ namespace Framework\Router;
  * Class Route
  * Represent a matched route
  */
-class Route {
+class Route
+{
         
     /**
      * name
      *
      * @var mixed
      */
-    private $name;    
+    private $name;
     /**
      * callback
      *
      * @var mixed
      */
-    private $callback;    
+    private $callback;
     /**
      * parameters
      *
@@ -39,7 +40,7 @@ class Route {
     /**
      * @return string
      */
-    public function getName(): string 
+    public function getName(): string
     {
         return $this->name;
     }
@@ -49,7 +50,7 @@ class Route {
      *
      * @return callable
      */
-    public function getCallback(): callable 
+    public function getCallback(): callable
     {
         return $this->callback;
     }
@@ -60,7 +61,7 @@ class Route {
      *
      * @return string[]
      */
-    public function getParams(): array 
+    public function getParams(): array
     {
         return $this->params;
     }

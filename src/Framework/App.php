@@ -7,7 +7,8 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
 class App
-{   
+{
+
         
     /**
      * List of modules
@@ -28,9 +29,9 @@ class App
      * @param  string[] $modules List of the loading modules
      */
     public function __construct(array $modules = [])
-    {   
+    {
         $this->router = new Router();
-        foreach($modules as $module){
+        foreach ($modules as $module) {
             $this->modules[] = new $module($this->router);
         }
     }
@@ -44,9 +45,14 @@ class App
                 ->withHeader('Location', substr($uri, 0, -1));
         }
         $route = $this->router->match($request);
-        if (is_null($route)){
+        if (is_null($route)) {
             return new Response(404, [], '<h1>Error 404</h1>');
         }
+        $params = $route->getParams();
+        $request = array_reduce(array_keys($params), function ($request, $key) use ($params) {
+            return $request->withAttribute($key, $params[$key]);
+        }, $request);
+
         $response = call_user_func_array($route->getCallback(), [$request]);
         if (is_string($response)) {
             return new Response(200, [], $response);
